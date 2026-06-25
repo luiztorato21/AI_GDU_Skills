@@ -32,10 +32,11 @@ $snippetContent = @"
     "body": [
       "#fetch:$urlCodeAlign",
       "",
-      "Revise o codigo abaixo pelos padroes CSDE:",
+      "Revise o codigo abaixo pelos padroes CSDE.",
+      "Indique o arquivo ou cole o codigo que deseja revisar:",
       "\$0"
     ],
-    "description": "Carrega skill CodeAlign e abre revisao de codigo C#/.NET"
+    "description": "Carrega skill CodeAlign — indique o arquivo ou cole o codigo a revisar"
   },
   "CSDE Revisao Banco": {
     "prefix": "CDU-banco",
@@ -80,9 +81,22 @@ description: 'Revisa codigo C#/.NET pelos padroes CSDE (CodeAlign)'
 #fetch:$urlCodeAlign
 
 Responda sempre em portugues.
-Revise o codigo abaixo pelos padroes CSDE.
-Ao finalizar, salve o relatorio em um arquivo chamado ``revisao-codigo.md`` na raiz do workspace:
 
+**Nao analise nenhum codigo automaticamente.**
+
+Aguarde o usuario indicar o que deve ser revisado.
+Quando receber a indicacao, pergunte se nao estiver claro.
+
+Exemplos do que o usuario pode informar:
+- Colar o codigo diretamente no chat
+- Indicar o caminho de um arquivo (ex: Controllers/AlunoController.cs)
+- Adicionar o arquivo via anexo no chat
+
+Apos receber o codigo ou arquivo, aplique os padroes CSDE e gere o relatorio completo em Markdown.
+Ao finalizar, salve o relatorio em um arquivo chamado ``revisao-codigo.md`` na raiz do workspace.
+
+---
+Qual arquivo ou codigo voce quer revisar?
 "@
 
 $promptBanco = @"

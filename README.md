@@ -2,7 +2,8 @@
 ## Configure uma vez. Use para sempre.
 
 > Após rodar o `setup.ps1`, você digita `/CDU-code` ou `/CDU-banco` no chat
-> do VS Code e aperta **Enter**. O atalho carrega a skill direto do GitHub
+> do VS Code e aperta **Enter**. A IA pergunta qual arquivo ou código revisar —
+> indique o caminho ou cole o código. A skill é carregada direto do GitHub
 > automaticamente — sem lembrar URL, sem clonar nada.
 
 > **Nota:** use `/nome-do-prompt` no chat — a tecla Tab (snippets) não funciona
@@ -171,27 +172,24 @@ Adicione essa linha dentro das chaves `{ }`:
 ```
 1. Abra o chat
    → Copilot: Ctrl+Alt+I
-   → Claude:  clique no painel lateral
 
-2. Digite:  CDU-code  →  Tab
+2. Digite:  /CDU-code  →  Enter
 
-3. O chat abre com a skill já carregada:
-   #fetch:https://raw.githubusercontent.com/.../CodeAlign.md
+3. A IA vai perguntar qual arquivo ou código revisar.
+   Responda indicando o caminho do arquivo ou cole o código:
+   Controllers/AprovacaoMonitorController.cs
 
-   Revise o código abaixo pelos padrões CSDE:
-   |cursor aqui|
-
-4. Cole o código e pressione Enter
+4. A IA analisa e gera o relatório
 ```
 
 ### Usar apontando para um arquivo do projeto
 
 ```
 1. Abra o chat
-2. Digite:  CDU-code  →  Tab
-3. Substitua o caminho pelo arquivo real:
+2. Digite:  /CDU-code  →  Enter
+3. Informe o caminho do arquivo quando a IA perguntar:
    Controllers/AprovacaoMonitorController.cs
-4. Enter
+4. Enter — a IA revisa só esse arquivo
 ```
 
 ### Usar para revisar SQL / Stored Procedure
@@ -272,11 +270,11 @@ A IA vai responder com o relatório já formatado:
 
 ## Referência rápida dos atalhos
 
-| Digite no chat | + Tab | O que faz |
+| Digite no chat | + Enter | O que faz |
 |---|---|---|
-| `CDU-code` | Tab | Revisão de código C# / .NET / JS / Blazor — cola o código no chat |
-| `CDU-banco` | Tab | Revisão de SQL / Stored Procedures — cola o SQL no chat |
-| `CDU-code-branch` | Tab | Revisão de **todos os arquivos alterados na branch atual** |
+| `/CDU-code` | Enter | Revisão de código C# / .NET / JS / Blazor — a IA pede para você indicar o arquivo ou colar o código |
+| `/CDU-banco` | Enter | Revisão de SQL / Stored Procedures — cole o SQL quando solicitado |
+| `/CDU-code-branch` | Enter | Revisão de **todos os arquivos alterados na branch atual** |
 
 ---
 
