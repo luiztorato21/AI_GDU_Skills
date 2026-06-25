@@ -92,8 +92,15 @@ Exemplos do que o usuario pode informar:
 - Indicar o caminho de um arquivo (ex: Controllers/AlunoController.cs)
 - Adicionar o arquivo via anexo no chat
 
-Apos receber o codigo ou arquivo, aplique os padroes CSDE e gere o relatorio completo em Markdown.
-Ao finalizar, salve o relatorio em um arquivo chamado ``revisao-codigo.md`` na raiz do workspace.
+Apos receber o codigo ou arquivo:
+1. Identifique o nome do arquivo revisado (sem extensao). Se forem varios, use o nome do principal.
+2. Obtenha a data e hora atual no formato YYYY-MM-DD_HH-mm.
+3. Aplique os padroes CSDE e gere o relatorio completo em Markdown dentro de um bloco de codigo.
+4. Na primeira linha antes do bloco, informe o nome sugerido para salvar o arquivo:
+   > **Salve como:** ``revisao-codigo_[nome-do-arquivo]-[YYYY-MM-DD_HH-mm].md``
+   Exemplo: ``revisao-codigo_AlunoController-2026-06-25_14-30.md``
+
+O relatorio fica no chat — o usuario copia e salva manualmente com o nome sugerido.
 
 ---
 Qual arquivo ou codigo voce quer revisar?
@@ -107,9 +114,23 @@ description: 'Revisa SQL / Stored Procedures pelos padroes CSDE (DatabaseAlign)'
 #fetch:$urlDatabaseAlign
 
 Responda sempre em portugues.
-Revise o SQL abaixo pelos padroes CSDE.
-Ao finalizar, salve o relatorio em um arquivo chamado ``revisao-banco.md`` na raiz do workspace:
 
+**Nao analise nenhum SQL automaticamente.**
+
+Aguarde o usuario colar o SQL ou indicar o arquivo a revisar.
+
+Apos receber o SQL ou arquivo:
+1. Identifique o nome da stored procedure ou arquivo revisado (sem extensao).
+2. Obtenha a data e hora atual no formato YYYY-MM-DD_HH-mm.
+3. Aplique os padroes CSDE e gere o relatorio completo em Markdown dentro de um bloco de codigo.
+4. Na primeira linha antes do bloco, informe o nome sugerido para salvar o arquivo:
+   > **Salve como:** ``revisao-banco_[nome-da-sp]-[YYYY-MM-DD_HH-mm].md``
+   Exemplo: ``revisao-banco_SPL_BuscaAluno-2026-06-25_14-30.md``
+
+O relatorio fica no chat — o usuario copia e salva manualmente com o nome sugerido.
+
+---
+Cole o SQL ou informe o arquivo que deseja revisar:
 "@
 
 $promptBranch = @"
@@ -127,14 +148,26 @@ Execute no terminal: ``git status 2>&1``
   > **Erro:** Esta pasta nao e um repositorio Git. Nao e possivel identificar os arquivos alterados. Inicialize o repositorio com ``git init`` ou abra a pasta correta e tente novamente.
   E PARE. Nao execute nenhum passo seguinte.
 
-**PASSO 2 — Identificar arquivos alterados**
+**PASSO 2 — Capturar nome da branch e data/hora**
+Execute: ``git branch --show-current``
+Guarde o resultado como [nome-da-branch] (substitua / por - se houver barras).
+Obtenha a data e hora atual no formato YYYY-MM-DD_HH-mm. Guarde como [data-hora].
+
+**PASSO 3 — Identificar arquivos alterados**
 Execute: ``git diff --name-only HEAD``
 - Se nao houver nenhum arquivo listado, informe que nao ha alteracoes na branch e PARE.
 - Ignore arquivos que nao sejam .cs, .razor, .cshtml ou .js.
 
-**PASSO 3 — Revisar arquivos**
-Para cada arquivo identificado no Passo 2, aplique os padroes CSDE descritos acima.
-Ao finalizar a revisao, salve o relatorio completo em um arquivo chamado ``revisao-branch.md`` na raiz do workspace.
+**PASSO 4 — Revisar arquivos**
+Para cada arquivo identificado no Passo 3, aplique os padroes CSDE descritos acima.
+
+**PASSO 5 — Entregar o relatorio**
+Gere o relatorio completo em Markdown dentro de um bloco de codigo.
+Na primeira linha antes do bloco, informe o nome sugerido para salvar:
+> **Salve como:** ``revisao-branch_[nome-da-branch]-[data-hora].md``
+Exemplo: ``revisao-branch_feature-login-2026-06-25_14-30.md``
+
+O relatorio fica no chat — o usuario copia e salva manualmente com o nome sugerido.
 "@
 
 try {
