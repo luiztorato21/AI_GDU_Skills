@@ -1,9 +1,12 @@
 # AI GDU Skills — Guia de Configuração
 ## Configure uma vez. Use para sempre.
 
-> Após rodar o `setup.ps1`, você digita `CDU-code` ou `CDU-banco` no chat
-> do VS Code e aperta **Tab**. O atalho carrega a skill direto do GitHub
+> Após rodar o `setup.ps1`, você digita `/CDU-code` ou `/CDU-banco` no chat
+> do VS Code e aperta **Enter**. O atalho carrega a skill direto do GitHub
 > automaticamente — sem lembrar URL, sem clonar nada.
+
+> **Nota:** use `/nome-do-prompt` no chat — a tecla Tab (snippets) não funciona
+> na caixa de chat do Copilot, apenas em arquivos de código abertos.
 
 ---
 
