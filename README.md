@@ -234,17 +234,11 @@ Ignore arquivos que não sejam .cs, .razor, .cshtml ou .js.
 
 ## Resultado esperado
 
-A IA responde com o relatório formatado **dentro do chat**. Antes do bloco ela informa o nome sugerido para salvar:
-
-```
-> **Salve como:** `revisao-codigo_AlunoController-2026-06-25_14-30.md`
-```
-
-Copie o conteúdo e salve manualmente com esse nome. A IA **não salva arquivos** fora do chat.
+A IA revisa o código aplicando **somente as regras da skill** (não usa conhecimento próprio) e salva o relatório automaticamente na raiz do workspace com o nome incluindo o arquivo revisado e a data/hora.
 
 ### Padrão de nomes dos relatórios
 
-| Comando | Nome do arquivo gerado |
+| Comando | Nome do arquivo salvo |
 |---|---|
 | `/CDU-code` | `revisao-codigo_[NomeArquivo]-[YYYY-MM-DD_HH-mm].md` |
 | `/CDU-banco` | `revisao-banco_[NomeSP]-[YYYY-MM-DD_HH-mm].md` |
