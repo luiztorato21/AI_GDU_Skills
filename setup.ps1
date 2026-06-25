@@ -104,11 +104,22 @@ mode: 'agent'
 description: 'Revisa todos os arquivos alterados na branch pelos padroes CSDE'
 ---
 #fetch:$urlCodeAlign
-#changes
 
 Responda sempre em portugues.
-Revise todos os arquivos alterados nessa branch pelos padroes CSDE.
-Ignore arquivos que nao sejam .cs, .razor, .cshtml ou .js.
+
+**PASSO 1 — Verificar repositorio Git**
+Execute no terminal: ``git status 2>&1``
+- Se o retorno contiver "fatal: not a git repository" (ou similar), responda:
+  > **Erro:** Esta pasta nao e um repositorio Git. Nao e possivel identificar os arquivos alterados. Inicialize o repositorio com ``git init`` ou abra a pasta correta e tente novamente.
+  E PARE. Nao execute nenhum passo seguinte.
+
+**PASSO 2 — Identificar arquivos alterados**
+Execute: ``git diff --name-only HEAD``
+- Se nao houver nenhum arquivo listado, informe que nao ha alteracoes na branch e PARE.
+- Ignore arquivos que nao sejam .cs, .razor, .cshtml ou .js.
+
+**PASSO 3 — Revisar arquivos**
+Para cada arquivo identificado no Passo 2, aplique os padroes CSDE descritos acima.
 Ao finalizar a revisao, salve o relatorio completo em um arquivo chamado ``revisao-branch.md`` na raiz do workspace.
 "@
 
