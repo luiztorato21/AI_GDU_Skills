@@ -124,29 +124,20 @@ try {
     exit 1
 }
 
-# Atualizar settings.json com seguranca
+# Atualizar settings.json com seguranca (compativel com PowerShell 5.1)
 try {
-    if (Test-Path $settingsPath) {
-        $rawSettings = Get-Content $settingsPath -Raw
-        if ([string]::IsNullOrWhiteSpace($rawSettings)) {
-            $settings = [ordered]@{}
-        } else {
-            $settings = $rawSettings | ConvertFrom-Json -AsHashtable
-        }
-    } else {
-        $settings = [ordered]@{}
+    $rawSettings = if (Test-Path $settingsPath) { Get-Content $settingsPath -Raw } else { '{}' }
+    if ([string]::IsNullOrWhiteSpace($rawSettings)) { $rawSettings = '{}' }
+
+    # Adicionar chaves via regex para evitar dependencia de -AsHashtable (PS 5.1)
+    if ($rawSettings -notmatch '"editor\.tabCompletion"') {
+        $rawSettings = $rawSettings -replace '^\s*\{', "{`n  `"editor.tabCompletion`": `"on`","
     }
 
-    $settings["editor.tabCompletion"] = "on"
-    $settings["chat.promptFilesLocations"] = @($promptsDir.Replace("\", "/"))
-
-    $settingsJson = $settings | ConvertTo-Json -Depth 10
-    Set-Content -Path $settingsPath -Value $settingsJson -Encoding UTF8
-
+    $rawSettings | Set-Content -Path $settingsPath -Encoding UTF8
     Write-Host "  [OK] settings.json atualizado." -ForegroundColor Green
 } catch {
     Write-Host "  [AVISO] Nao foi possivel atualizar settings.json automaticamente." -ForegroundColor Yellow
-    Write-Host "          Verifique se o arquivo esta com JSON valido." -ForegroundColor Yellow
     Write-Host "          Caminho: $settingsPath" -ForegroundColor Gray
 }
 
@@ -154,7 +145,7 @@ try {
 Write-Host ""
 Write-Host "  Verificando acesso ao GitHub..." -ForegroundColor Gray
 try {
-    Invoke-WebRequest -Uri $urlCodeAlign -Method Head -TimeoutSec 5 -ErrorAction Stop | Out-Null
+    Invoke-WebRequest -Uri $urlCodeAlign -Method Head -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop | Out-Null
     Write-Host "  [OK] GitHub acessivel. Skills disponiveis." -ForegroundColor Green
 } catch {
     Write-Host "  [AVISO] Nao foi possivel acessar o GitHub agora." -ForegroundColor Yellow
